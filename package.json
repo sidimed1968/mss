@@ -1,0 +1,30 @@
+{
+  "name": "bureau-hikma",
+  "version": "1.0.0",
+  "description": "Bureau Hikma - Librairie numérique pour la Communication de Santé",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve -l 3000",
+    "start": "npx serve -l 3000",
+    "build": "echo 'Static site - no build needed'",
+    "preview": "npx serve -l 8080"
+  },
+  "keywords": [
+    "librairie",
+    "communication",
+    "santé",
+    "numérique",
+    "french",
+    "arabic"
+  ],
+  "author": "Bureau Hikma",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sidimed1968/mss"
+  },
+  "devDependencies": {
+    "serve": "^14.2.6"
+  }
+}

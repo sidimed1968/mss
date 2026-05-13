@@ -5,8 +5,10 @@ const Hikma = (() => {
   const DB_NAME = "hikma-assets-db";
   const DB_STORE = "files";
 
-  const defaultPrefaceFr = "Dans un monde marqué par des mutations rapides aux niveaux sanitaire, social et économique, les questions de santé et de développement ne peuvent plus être réduites à la seule disponibilité des services ou à la mobilisation des ressources. Elles sont désormais étroitement liées à la capacité des acteurs à communiquer efficacement, à transmettre les connaissances et à influencer positivement les comportements individuels et collectifs. Cet ouvrage propose une vision intégrée du rôle de la communication comme levier essentiel au service de la santé et du développement. Nouakchott, le 29 avril 2026 Dr Bechir Aounen.";
-  const defaultPrefaceAr = "في عالم يشهد تحولات صحية واجتماعية واقتصادية متسارعة، لم تعد قضايا الصحة والتنمية مرتبطة فقط بتوفر الخدمات أو الموارد، بل أصبحت متصلة بقدرة الفاعلين على التواصل الفعال ونقل المعرفة وبناء الثقة. يقدم هذا الكتاب رؤية مدمجة لدور الاتصال كرافعة أساسية لخدمة الصحة والتنمية. نواكشوط، 29 أبريل 2026 الدكتور بشير عونن.";
+  const defaultPrefaceFr1 = "Dans un monde marqué par des mutations rapides aux niveaux sanitaire, social et économique, les questions de santé et de développement ne peuvent plus être réduites à la seule disponibilité des services ou à la mobilisation des ressources. Elles sont désormais étroitement liées à la capacité des acteurs à communiquer efficacement, à transmettre les connaissances et à influencer positivement les comportements individuels et collectifs.";
+  const defaultPrefaceFr2 = "Cet ouvrage propose une vision intégrée du rôle de la communication comme levier essentiel au service de la santé et du développement. Il s'adresse aux professionnels de santé, aux décideurs, aux chercheurs et à tous ceux qui s'intéressent aux liens entre communication, santé et développement durable. Nouakchott, le 29 avril 2026 - Dr Bechir Aounen.";
+  const defaultPrefaceAr1 = "في عالم يشهد تحولات صحية واجتماعية واقتصادية متسارعة، لم تعد قضايا الصحة والتنمية مرتبطة فقط بتوفر الخدمات أو الموارد، بل أصبحت متصلة بقدرة الفاعلين على التواصل الفعال ونقل المعرفة وبناء الثقة.";
+  const defaultPrefaceAr2 = "يقدم هذا الكتاب رؤية مدمجة لدور الاتصال كرافعة أساسية لخدمة الصحة والتنمية. يتوجه إلى المهنيين الصحيين وصناع القرار والباحثين وكل المهتمين بالعلاقة بين الاتصال والصحة والتنمية المستدامة. نواكشوط، 29 أبريل 2026 - الدكتور بشير عونن.";
 
   const translations = {
     fr: {
@@ -106,8 +108,10 @@ const Hikma = (() => {
       whatsapp: "22232624388",
       pdfTitleFr: "Communication de Santé",
       pdfTitleAr: "الاتصال كأداة للصحة والتنمية",
-      prefaceFr: defaultPrefaceFr,
-      prefaceAr: defaultPrefaceAr,
+      prefaceFr1: defaultPrefaceFr1,
+      prefaceFr2: defaultPrefaceFr2,
+      prefaceAr1: defaultPrefaceAr1,
+      prefaceAr2: defaultPrefaceAr2,
       fileNames: { pdfFr: "", pdfAr: "", cover: "" }
     };
   }
@@ -180,6 +184,17 @@ const Hikma = (() => {
     });
     db.close();
     return file;
+  }
+
+  async function deleteFile(key) {
+    const db = await openDb();
+    await new Promise((resolve, reject) => {
+      const tx = db.transaction(DB_STORE, "readwrite");
+      tx.objectStore(DB_STORE).delete(key);
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+    db.close();
   }
 
   async function fileToDataUrl(file) {
@@ -329,6 +344,7 @@ ${xref}
 
   return {
     applyLanguage,
+    deleteFile,
     downloadBlob,
     downloadBook,
     escapeAttr,

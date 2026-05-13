@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bureau Hikma - Librairie numérique</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body data-page="visitor">
@@ -50,9 +51,35 @@
             <button class="primary" id="openOrder">▣ <span data-i18n="orderNow">Commander Maintenant</span></button>
           </div>
         </div>
-        <section class="preface">
-          <h2 data-i18n="prefaceTitle">Préface du livre</h2>
-          <p id="prefaceText"></p>
+        <section class="prefaces-section">
+          <!-- French prefaces — visible when lang=fr -->
+          <div class="prefaces-lang" id="prefacesFr" lang="fr" dir="ltr">
+            <p class="prefaces-label">Préfaces</p>
+            <div class="prefaces-grid">
+              <article class="preface-card">
+                <span class="preface-number">01</span>
+                <p id="prefaceFr1Text"></p>
+              </article>
+              <article class="preface-card">
+                <span class="preface-number">02</span>
+                <p id="prefaceFr2Text"></p>
+              </article>
+            </div>
+          </div>
+          <!-- Arabic prefaces — visible when lang=ar -->
+          <div class="prefaces-lang hidden" id="prefacesAr" lang="ar" dir="rtl">
+            <p class="prefaces-label">المقدمات</p>
+            <div class="prefaces-grid">
+              <article class="preface-card">
+                <span class="preface-number">01</span>
+                <p id="prefaceAr1Text"></p>
+              </article>
+              <article class="preface-card">
+                <span class="preface-number">02</span>
+                <p id="prefaceAr2Text"></p>
+              </article>
+            </div>
+          </div>
         </section>
       </section>
 

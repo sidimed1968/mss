@@ -9,17 +9,34 @@ function visitorRoute() {
 
 async function renderVisitorSettings() {
   const s = Hikma.settings();
+
+  // Price
   const price = document.getElementById("bookPrice");
   if (price) price.textContent = `${s.price} ${s.currency}`;
 
-  const preface = document.getElementById("prefaceText");
-  if (preface) preface.textContent = visitorLang === "ar" ? s.prefaceAr : s.prefaceFr;
+  // Populate all four preface texts
+  const ids = { prefaceFr1Text: s.prefaceFr1, prefaceFr2Text: s.prefaceFr2, prefaceAr1Text: s.prefaceAr1, prefaceAr2Text: s.prefaceAr2 };
+  Object.entries(ids).forEach(([id, text]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text || "";
+  });
 
+  // Show only the section matching the current language
+  renderPrefaceLang();
+
+  // Book cover
   const cover = document.getElementById("bookCover");
   if (cover) {
     const file = await Hikma.getFile("cover");
     if (file) cover.src = URL.createObjectURL(file);
   }
+}
+
+function renderPrefaceLang() {
+  const prefacesFr = document.getElementById("prefacesFr");
+  const prefacesAr = document.getElementById("prefacesAr");
+  if (prefacesFr) prefacesFr.classList.toggle("hidden", visitorLang === "ar");
+  if (prefacesAr) prefacesAr.classList.toggle("hidden", visitorLang === "fr");
 }
 
 function renderTrack(order) {
@@ -52,7 +69,7 @@ function bindVisitor() {
   document.getElementById("languageToggle")?.addEventListener("click", () => {
     visitorLang = visitorLang === "fr" ? "ar" : "fr";
     Hikma.applyLanguage(visitorLang);
-    renderVisitorSettings();
+    renderPrefaceLang();
   });
 
   document.querySelectorAll("[data-view]").forEach(btn => {

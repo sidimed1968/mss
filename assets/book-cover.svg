@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 420" width="300" height="420">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a5f7a"/>
+      <stop offset="100%" style="stop-color:#0d3d4d"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d4af37"/>
+      <stop offset="100%" style="stop-color:#f4d03f"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Book background -->
+  <rect width="300" height="420" fill="url(#bgGrad)" rx="4"/>
+  
+  <!-- Spine shadow -->
+  <rect x="0" y="0" width="15" height="420" fill="rgba(0,0,0,0.2)"/>
+  
+  <!-- Decorative border -->
+  <rect x="20" y="20" width="260" height="380" fill="none" stroke="url(#accentGrad)" stroke-width="2" rx="2"/>
+  <rect x="30" y="30" width="240" height="360" fill="none" stroke="url(#accentGrad)" stroke-width="1" rx="2" opacity="0.5"/>
+  
+  <!-- Top ornament -->
+  <path d="M100 60 L150 45 L200 60" fill="none" stroke="url(#accentGrad)" stroke-width="2"/>
+  <circle cx="150" cy="45" r="5" fill="url(#accentGrad)"/>
+  
+  <!-- Main title area -->
+  <rect x="50" y="100" width="200" height="120" fill="rgba(255,255,255,0.05)" rx="4"/>
+  
+  <!-- Arabic text -->
+  <text x="150" y="145" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#fff" font-weight="bold">مكتب الحكمة</text>
+  
+  <!-- French text -->
+  <text x="150" y="185" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="url(#accentGrad)">Bureau Hikma</text>
+  
+  <!-- Divider line -->
+  <line x1="80" y1="240" x2="220" y2="240" stroke="url(#accentGrad)" stroke-width="1"/>
+  
+  <!-- Book icon -->
+  <g transform="translate(125, 270)">
+    <path d="M0 0 L25 -10 L50 0 L50 40 L25 30 L0 40 Z" fill="none" stroke="url(#accentGrad)" stroke-width="1.5"/>
+    <line x1="25" y1="-10" x2="25" y2="30" stroke="url(#accentGrad)" stroke-width="1"/>
+    <line x1="8" y1="8" x2="22" y2="3" stroke="url(#accentGrad)" stroke-width="0.5" opacity="0.6"/>
+    <line x1="8" y1="16" x2="22" y2="11" stroke="url(#accentGrad)" stroke-width="0.5" opacity="0.6"/>
+    <line x1="28" y1="3" x2="42" y2="8" stroke="url(#accentGrad)" stroke-width="0.5" opacity="0.6"/>
+    <line x1="28" y1="11" x2="42" y2="16" stroke="url(#accentGrad)" stroke-width="0.5" opacity="0.6"/>
+  </g>
+  
+  <!-- Bottom ornament -->
+  <path d="M100 360 L150 375 L200 360" fill="none" stroke="url(#accentGrad)" stroke-width="2"/>
+  <circle cx="150" cy="375" r="5" fill="url(#accentGrad)"/>
+</svg>
