@@ -146,28 +146,36 @@ async function renderSettings() {
         </label>
       </div>
       
-      <div class="section-title" style="margin-top: 32px;"><div><h3>Prefaces francaises</h3><p>Deux prefaces affichees cote a cote sur l'ecran visiteur</p></div></div>
-      <div class="settings-grid">
-        <label class="panel wide">Preface francaise 1
-          <textarea name="prefaceFr1" rows="6">${Hikma.escapeHtml(s.prefaceFr1 || "")}</textarea>
-          <input name="prefaceFr1File" type="file" accept=".txt,text/plain" />
-        </label>
-        <label class="panel wide">Preface francaise 2
-          <textarea name="prefaceFr2" rows="6">${Hikma.escapeHtml(s.prefaceFr2 || "")}</textarea>
-          <input name="prefaceFr2File" type="file" accept=".txt,text/plain" />
-        </label>
+      <div class="section-title" style="margin-top: 40px;">
+        <div><h3>Préfaces françaises</h3><p>Affichées côte à côte sur l'écran visiteur (langue française)</p></div>
       </div>
-      
-      <div class="section-title" style="margin-top: 32px;"><div><h3>المقدمات العربية</h3><p>مقدمتان تُعرضان جنبًا إلى جنب على شاشة الزائر</p></div></div>
-      <div class="settings-grid">
-        <label class="panel wide">المقدمة العربية 1
-          <textarea name="prefaceAr1" rows="6" dir="rtl">${Hikma.escapeHtml(s.prefaceAr1 || "")}</textarea>
-          <input name="prefaceAr1File" type="file" accept=".txt,text/plain" />
-        </label>
-        <label class="panel wide">المقدمة العربية 2
-          <textarea name="prefaceAr2" rows="6" dir="rtl">${Hikma.escapeHtml(s.prefaceAr2 || "")}</textarea>
-          <input name="prefaceAr2File" type="file" accept=".txt,text/plain" />
-        </label>
+      <div class="prefaces-admin-grid">
+        <div class="preface-admin-card panel">
+          <div class="preface-admin-header"><span class="preface-admin-num">01</span><span>Préface 1 — Français</span></div>
+          <label>Texte<textarea name="prefaceFr1" rows="7">${Hikma.escapeHtml(s.prefaceFr1 || "")}</textarea></label>
+          <label class="file-label">Importer .txt<input name="prefaceFr1File" type="file" accept=".txt,text/plain" /></label>
+        </div>
+        <div class="preface-admin-card panel">
+          <div class="preface-admin-header"><span class="preface-admin-num">02</span><span>Préface 2 — Français</span></div>
+          <label>Texte<textarea name="prefaceFr2" rows="7">${Hikma.escapeHtml(s.prefaceFr2 || "")}</textarea></label>
+          <label class="file-label">Importer .txt<input name="prefaceFr2File" type="file" accept=".txt,text/plain" /></label>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top: 40px;">
+        <div><h3 dir="rtl">المقدمات العربية</h3><p dir="rtl">تُعرضان جنبًا إلى جنب على شاشة الزائر (اللغة العربية)</p></div>
+      </div>
+      <div class="prefaces-admin-grid">
+        <div class="preface-admin-card panel">
+          <div class="preface-admin-header"><span class="preface-admin-num">01</span><span dir="rtl">المقدمة 1 — عربي</span></div>
+          <label dir="rtl">النص<textarea name="prefaceAr1" rows="7" dir="rtl">${Hikma.escapeHtml(s.prefaceAr1 || "")}</textarea></label>
+          <label class="file-label" dir="rtl">استيراد .txt<input name="prefaceAr1File" type="file" accept=".txt,text/plain" /></label>
+        </div>
+        <div class="preface-admin-card panel">
+          <div class="preface-admin-header"><span class="preface-admin-num">02</span><span dir="rtl">المقدمة 2 — عربي</span></div>
+          <label dir="rtl">النص<textarea name="prefaceAr2" rows="7" dir="rtl">${Hikma.escapeHtml(s.prefaceAr2 || "")}</textarea></label>
+          <label class="file-label" dir="rtl">استيراد .txt<input name="prefaceAr2File" type="file" accept=".txt,text/plain" /></label>
+        </div>
       </div>
       <div class="settings-actions">
         <button class="primary" type="submit">Enregistrer les paramètres</button>

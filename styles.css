@@ -241,63 +241,71 @@ body[dir="rtl"] .steps article:not(:last-child)::after { content: "←"; right: 
 
 /* Prefaces Section - Visitor */
 .prefaces-section {
-  margin-top: 50px;
-  border-top: 1px solid rgba(255,255,255,.14);
-  padding-top: 34px;
+  margin-top: 56px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  padding-top: 44px;
 }
 .prefaces-lang {
-  margin-bottom: 40px;
+  margin-bottom: 48px;
 }
-.prefaces-lang h2 {
+.prefaces-label {
+  margin: 0 0 22px;
   text-transform: uppercase;
-  font: 900 13px/1 Inter, sans-serif;
-  letter-spacing: .12em;
-  color: #9fb2c2;
-  margin-bottom: 24px;
+  font: 900 12px/1 Inter, sans-serif;
+  letter-spacing: .14em;
+  color: #7a9ab0;
+}
+#prefacesAr .prefaces-label {
+  text-align: right;
+  font-family: Tahoma, Arial, sans-serif;
+  letter-spacing: 0;
 }
 .prefaces-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 .preface-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-  padding: 28px 24px 24px;
+  background: rgba(255,255,255,.055);
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 14px;
+  padding: 32px 26px 26px;
+  transition: background .2s;
+}
+.preface-card:hover {
+  background: rgba(255,255,255,.09);
 }
 .preface-number {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 14px;
+  right: 18px;
   font-size: 11px;
   font-weight: 900;
-  color: rgba(255, 255, 255, 0.25);
-  letter-spacing: 0.1em;
+  color: rgba(255,255,255,.2);
+  letter-spacing: .1em;
 }
-body[dir="rtl"] .preface-number {
+#prefacesAr .preface-number {
   right: auto;
-  left: 16px;
+  left: 18px;
 }
 .preface-card p {
   margin: 0;
-  color: #d7e0ea;
-  line-height: 1.72;
-  font-size: 16px;
+  color: #c8d8e6;
+  line-height: 1.78;
+  font-size: 15.5px;
 }
 #prefacesAr .preface-card {
   text-align: right;
-}
-#prefacesAr h2 {
-  text-align: right;
   font-family: Tahoma, Arial, sans-serif;
+}
+#prefacesAr .preface-card p {
+  font-size: 16px;
+  line-height: 1.9;
 }
 
 @media (max-width: 768px) {
-  .prefaces-grid {
-    grid-template-columns: 1fr;
-  }
+  .prefaces-grid { grid-template-columns: 1fr; }
 }
 
 .track-shell, .admin-shell { padding: 48px max(24px, calc((100vw - 1340px) / 2)); }
@@ -452,6 +460,56 @@ td.client { font-weight: 800; }
 }
 .media-settings input[type="file"] {
   padding: 10px;
+}
+
+/* Admin preface cards */
+.prefaces-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.preface-admin-card {
+  padding: 20px;
+  display: grid;
+  gap: 12px;
+}
+.preface-admin-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--muted);
+}
+.preface-admin-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+.preface-admin-card textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+.file-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+.file-label input[type="file"] {
+  padding: 8px;
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .prefaces-admin-grid { grid-template-columns: 1fr; }
 }
 
 /* Cover Upload Section */
