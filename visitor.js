@@ -12,8 +12,23 @@ async function renderVisitorSettings() {
   const price = document.getElementById("bookPrice");
   if (price) price.textContent = `${s.price} ${s.currency}`;
 
-  const preface = document.getElementById("prefaceText");
-  if (preface) preface.textContent = visitorLang === "ar" ? s.prefaceAr : s.prefaceFr;
+  // Render French prefaces
+  const prefaceFr1 = document.getElementById("prefaceFr1Text");
+  if (prefaceFr1) prefaceFr1.textContent = s.prefaceFr1 || "";
+  const prefaceFr2 = document.getElementById("prefaceFr2Text");
+  if (prefaceFr2) prefaceFr2.textContent = s.prefaceFr2 || "";
+
+  // Render Arabic prefaces
+  const prefaceAr1 = document.getElementById("prefaceAr1Text");
+  if (prefaceAr1) prefaceAr1.textContent = s.prefaceAr1 || "";
+  const prefaceAr2 = document.getElementById("prefaceAr2Text");
+  if (prefaceAr2) prefaceAr2.textContent = s.prefaceAr2 || "";
+
+  // Show/hide preface sections based on language
+  const prefacesFr = document.getElementById("prefacesFr");
+  const prefacesAr = document.getElementById("prefacesAr");
+  if (prefacesFr) prefacesFr.classList.toggle("hidden", visitorLang === "ar");
+  if (prefacesAr) prefacesAr.classList.toggle("hidden", visitorLang === "fr");
 
   const cover = document.getElementById("bookCover");
   if (cover) {

@@ -145,14 +145,28 @@ async function renderSettings() {
           <span class="muted">${s.fileNames.pdfAr || "Aucun PDF chargé"}</span>
         </label>
       </div>
+      
+      <div class="section-title" style="margin-top: 32px;"><div><h3>Prefaces francaises</h3><p>Deux prefaces affichees cote a cote sur l'ecran visiteur</p></div></div>
       <div class="settings-grid">
-        <label class="panel wide">Préface française
-          <textarea name="prefaceFr" rows="9">${Hikma.escapeHtml(s.prefaceFr)}</textarea>
-          <input name="prefaceFrFile" type="file" accept=".txt,text/plain" />
+        <label class="panel wide">Preface francaise 1
+          <textarea name="prefaceFr1" rows="6">${Hikma.escapeHtml(s.prefaceFr1 || "")}</textarea>
+          <input name="prefaceFr1File" type="file" accept=".txt,text/plain" />
         </label>
-        <label class="panel wide">المقدمة العربية
-          <textarea name="prefaceAr" rows="9" dir="rtl">${Hikma.escapeHtml(s.prefaceAr)}</textarea>
-          <input name="prefaceArFile" type="file" accept=".txt,text/plain" />
+        <label class="panel wide">Preface francaise 2
+          <textarea name="prefaceFr2" rows="6">${Hikma.escapeHtml(s.prefaceFr2 || "")}</textarea>
+          <input name="prefaceFr2File" type="file" accept=".txt,text/plain" />
+        </label>
+      </div>
+      
+      <div class="section-title" style="margin-top: 32px;"><div><h3>المقدمات العربية</h3><p>مقدمتان تُعرضان جنبًا إلى جنب على شاشة الزائر</p></div></div>
+      <div class="settings-grid">
+        <label class="panel wide">المقدمة العربية 1
+          <textarea name="prefaceAr1" rows="6" dir="rtl">${Hikma.escapeHtml(s.prefaceAr1 || "")}</textarea>
+          <input name="prefaceAr1File" type="file" accept=".txt,text/plain" />
+        </label>
+        <label class="panel wide">المقدمة العربية 2
+          <textarea name="prefaceAr2" rows="6" dir="rtl">${Hikma.escapeHtml(s.prefaceAr2 || "")}</textarea>
+          <input name="prefaceAr2File" type="file" accept=".txt,text/plain" />
         </label>
       </div>
       <div class="settings-actions">
@@ -331,8 +345,10 @@ function bindAdmin() {
     const form = event.target;
     const data = Object.fromEntries(new FormData(form).entries());
     const current = Hikma.settings();
-    const prefaceFrFile = await readTextFile(form.prefaceFrFile.files[0]);
-    const prefaceArFile = await readTextFile(form.prefaceArFile.files[0]);
+    const prefaceFr1File = await readTextFile(form.prefaceFr1File?.files[0]);
+    const prefaceFr2File = await readTextFile(form.prefaceFr2File?.files[0]);
+    const prefaceAr1File = await readTextFile(form.prefaceAr1File?.files[0]);
+    const prefaceAr2File = await readTextFile(form.prefaceAr2File?.files[0]);
     const next = {
       ...current,
       businessName: data.businessName,
@@ -344,8 +360,10 @@ function bindAdmin() {
       sedad: data.sedad,
       pdfTitleFr: data.pdfTitleFr,
       pdfTitleAr: data.pdfTitleAr,
-      prefaceFr: prefaceFrFile || data.prefaceFr,
-      prefaceAr: prefaceArFile || data.prefaceAr,
+      prefaceFr1: prefaceFr1File || data.prefaceFr1,
+      prefaceFr2: prefaceFr2File || data.prefaceFr2,
+      prefaceAr1: prefaceAr1File || data.prefaceAr1,
+      prefaceAr2: prefaceAr2File || data.prefaceAr2,
       fileNames: { ...current.fileNames }
     };
     if (form.pdfFr.files[0]) {
