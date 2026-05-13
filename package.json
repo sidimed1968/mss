@@ -5,10 +5,10 @@
   "main": "index.html",
   "type": "module",
   "scripts": {
-    "dev": "python -m http.server 3000",
-    "start": "python -m http.server 3000",
+    "dev": "npx serve -l 3000",
+    "start": "npx serve -l 3000",
     "build": "echo 'Static site - no build needed'",
-    "preview": "python -m http.server 8080"
+    "preview": "npx serve -l 8080"
   },
   "keywords": [
     "librairie",
@@ -23,5 +23,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/sidimed1968/mss"
+  },
+  "devDependencies": {
+    "serve": "^14.2.6"
   }
 }
