@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bureau Hikma - Librairie numérique</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="visitor">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Bureau Hikma">
+        <span class="brand-icon">▯</span>
+        <span>
+          <strong>Bureau Hikma</strong>
+          <small data-i18n="tagline">Communication de Santé</small>
+        </span>
+      </a>
+      <nav>
+        <a href="#home" data-i18n="home">Accueil</a>
+        <button class="nav-button" data-view="track" aria-label="Suivi de commande">⌕ <span data-i18n="track">Suivi de commande</span></button>
+        <button class="nav-button" id="languageToggle">◉ <span>العربية</span></button>
+      </nav>
+    </header>
+
+    <main id="app">
+      <section class="public-shell" data-route="home">
+        <div class="hero">
+          <aside class="book-card">
+            <img id="bookCover" src="assets/book-cover.svg" alt="Couverture du livre Communication de Santé" />
+            <span class="price">Prix<br /><strong id="bookPrice">200 MRU</strong></span>
+          </aside>
+          <div class="hero-content">
+            <span class="pill" data-i18n="category">Communication de Santé</span>
+            <h1 data-i18n="title">Librairie Numérique</h1>
+            <div class="trust-row">
+              <span>☆ <span data-i18n="trust1">Expertise reconnue</span></span>
+              <span>♙ <span data-i18n="trust2">Recherche approfondie</span></span>
+              <span>♧ <span data-i18n="trust3">Diffusé nationalement</span></span>
+            </div>
+            <section class="steps-band">
+              <p data-i18n="how">Comment ça marche ?</p>
+              <h2 data-i18n="stepsTitle">4 étapes simples pour commander et télécharger votre livre en français et en arabe</h2>
+              <div class="steps">
+                <article><span>01</span><b>▣</b><h3 data-i18n="step1Title">Passez votre commande</h3><p data-i18n="step1Text">Choisissez la version française, arabe ou les deux, puis renseignez votre nom et votre numéro WhatsApp.</p></article>
+                <article><span>02</span><b>▭</b><h3 data-i18n="step2Title">Effectuez le paiement</h3><p data-i18n="step2Text">Transférez le montant via Bankily, Masrivi, Sedad ou Click et joignez la capture d'écran.</p></article>
+                <article><span>03</span><b>◴</b><h3 data-i18n="step3Title">Attendez la validation</h3><p data-i18n="step3Text">L'administrateur vérifie votre paiement et vous envoie la confirmation WhatsApp.</p></article>
+                <article><span>04</span><b>⇩</b><h3 data-i18n="step4Title">Téléchargez votre livre</h3><p data-i18n="step4Text">Après validation, vérifiez votre commande par téléphone et téléchargez le PDF commandé.</p></article>
+              </div>
+            </section>
+            <button class="primary" id="openOrder">▣ <span data-i18n="orderNow">Commander Maintenant</span></button>
+          </div>
+        </div>
+        <section class="preface">
+          <h2 data-i18n="prefaceTitle">Préface du livre</h2>
+          <p id="prefaceText"></p>
+        </section>
+      </section>
+
+      <section class="track-shell hidden" data-route="track">
+        <div class="narrow">
+          <h1 data-i18n="trackTitle">Suivi de commande</h1>
+          <form id="trackForm" class="panel search-panel">
+            <input id="trackInput" required inputmode="tel" placeholder="Votre numéro WhatsApp" />
+            <button class="primary" data-i18n="search">Rechercher</button>
+          </form>
+          <div id="trackResult"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="features"><span>▣ Commande rapide</span><span>▭ Paiement sécurisé</span><span>⌕ Suivi par WhatsApp</span><span>⇩ PDF français et arabe</span></div>
+      <div class="footer-inner"><strong>Bureau Hikma</strong><span>© 2026 Bureau Hikma - Tous droits réservés</span></div>
+    </footer>
+
+    <dialog id="orderDialog">
+      <form id="orderForm" method="dialog" class="modal-card">
+        <button class="close" value="cancel" type="button">×</button>
+        <h2 data-i18n="newOrder">Nouvelle commande</h2>
+        <label>Nom complet<input name="name" required /></label>
+        <label>Numéro WhatsApp<input name="phone" required inputmode="tel" placeholder="Ex: 32624388" /></label>
+        <label>Version du livre
+          <select name="version" required>
+            <option value="fr">Français</option>
+            <option value="ar">العربية</option>
+            <option value="both">Français + العربية</option>
+          </select>
+        </label>
+        <label>Méthode de paiement<select name="payment" required><option>Bankily</option><option>Masrivi</option><option>Sedad</option><option>Click</option></select></label>
+        <label>Dédicace<textarea name="dedication" rows="3" placeholder="Optionnel"></textarea></label>
+        <label>Capture de paiement<input name="capture" type="file" accept="image/*" /></label>
+        <button class="primary" type="submit" data-i18n="sendOrder">Envoyer la commande</button>
+      </form>
+    </dialog>
+
+    <script src="shared.js"></script>
+    <script src="visitor.js"></script>
+  </body>
+</html>

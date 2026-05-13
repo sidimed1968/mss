@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administration - Bureau Hikma</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="admin">
+    <header class="topbar">
+      <a class="brand" href="index.html#home" aria-label="Bureau Hikma">
+        <span class="brand-icon">▯</span>
+        <span>
+          <strong>Administration</strong>
+          <small>Bureau Hikma</small>
+        </span>
+      </a>
+      <nav>
+        <a href="index.html#home" data-i18n="home">Accueil</a>
+        <button class="nav-button" id="languageToggle">◉ <span>العربية</span></button>
+      </nav>
+    </header>
+
+    <main class="admin-shell" id="app">
+      <div class="admin-head">
+        <div>
+          <h1>Administration</h1>
+          <p class="muted">Accès séparé: /admin/admin125</p>
+        </div>
+        <a class="primary light-link" href="index.html#track">Voir le suivi visiteur</a>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="active" data-admin-tab="orders">▣ <span data-i18n="orders">Gestion des Commandes</span></button>
+        <button data-admin-tab="accounting">▥ <span data-i18n="accounting">Comptabilité</span></button>
+        <button data-admin-tab="settings">⚙ <span data-i18n="settings">Paramètres</span></button>
+        <button data-admin-tab="archives">▤ <span data-i18n="archives">Archivage</span></button>
+        <button data-admin-tab="whatsapp">☏ WhatsApp</button>
+      </div>
+
+      <section class="admin-tab" id="tab-orders">
+        <div class="section-title">
+          <div><h2 data-i18n="orders">Gestion des Commandes</h2><p id="ordersCount"></p></div>
+          <div class="segmented"><button class="active" data-filter-archive="active">Commandes actives</button><button data-filter-archive="archived">Archives</button></div>
+        </div>
+        <div class="panel filters">
+          <input id="adminSearch" placeholder="Rechercher par nom, téléphone, version, dédicace, ID..." />
+          <select id="statusFilter"><option value="">Tous statuts</option><option value="pending">En attente</option><option value="validated">Validé</option></select>
+          <select id="paymentFilter"><option value="">Tous paiements</option><option>Bankily</option><option>Masrivi</option><option>Sedad</option><option>Click</option></select>
+          <select id="sortFilter"><option value="dateDesc">Date ↓ (récent)</option><option value="dateAsc">Date ↑</option><option value="nameAsc">Nom A-Z</option></select>
+          <div class="badges"><span class="warn" id="pendingBadge"></span><span class="ok" id="validBadge"></span></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Date</th><th>Client</th><th>WhatsApp</th><th>Version</th><th>Paiement</th><th>Capture</th><th>Dédicace</th><th>Statut</th><th>Actions</th></tr></thead>
+            <tbody id="ordersTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="admin-tab hidden" id="tab-accounting"></section>
+      <section class="admin-tab hidden" id="tab-settings"></section>
+      <section class="admin-tab hidden" id="tab-archives"></section>
+      <section class="admin-tab hidden" id="tab-whatsapp"></section>
+    </main>
+
+    <dialog id="detailDialog">
+      <div class="modal-card detail-card">
+        <button class="close" type="button">×</button>
+        <div id="detailContent"></div>
+      </div>
+    </dialog>
+
+    <script src="shared.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>
