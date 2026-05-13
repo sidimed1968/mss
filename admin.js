@@ -89,10 +89,18 @@ function renderAccounting() {
   `;
 }
 
-function renderSettings() {
+async function renderSettings() {
   const target = document.getElementById("tab-settings");
   if (!target) return;
   const s = Hikma.settings();
+  
+  // Get current cover for preview
+  let coverPreviewSrc = `${adminAssetPrefix}assets/book-cover.svg`;
+  const coverFile = await Hikma.getFile("cover");
+  if (coverFile) {
+    coverPreviewSrc = URL.createObjectURL(coverFile);
+  }
+  
   target.innerHTML = `
     <div class="section-title"><div><h2>Paramètres</h2><p>PDF du livre, couverture, préfaces et paiements</p></div></div>
     <form id="settingsForm" class="settings-form">
@@ -107,7 +115,27 @@ function renderSettings() {
         <label class="panel">Titre PDF français<input name="pdfTitleFr" value="${Hikma.escapeAttr(s.pdfTitleFr)}" /></label>
         <label class="panel">Titre PDF arabe<input name="pdfTitleAr" value="${Hikma.escapeAttr(s.pdfTitleAr)}" /></label>
       </div>
-      <div class="settings-grid media-settings">
+      
+      <div class="section-title" style="margin-top: 32px;"><div><h3>Couverture du livre</h3><p>Cette image sera affichée aux visiteurs sur la page d'accueil</p></div></div>
+      <div class="cover-upload-section">
+        <div class="cover-preview-container">
+          <img id="coverPreview" src="${coverPreviewSrc}" alt="Aperçu de la couverture" class="cover-preview" />
+          <div class="cover-info">
+            <span class="cover-status ${s.fileNames.cover ? 'uploaded' : 'default'}">${s.fileNames.cover ? '☑ Couverture personnalisée' : '◎ Couverture par défaut'}</span>
+            <span class="muted">${s.fileNames.cover || 'book-cover.svg'}</span>
+          </div>
+        </div>
+        <div class="cover-actions">
+          <label class="upload-btn primary">
+            ⇧ Importer une couverture
+            <input name="cover" type="file" accept="image/*" id="coverInput" hidden />
+          </label>
+          <button class="primary muted-btn" type="button" data-download-admin-file="cover">⇩ Télécharger</button>
+          ${s.fileNames.cover ? '<button class="primary danger-btn" type="button" id="removeCover">× Supprimer</button>' : ''}
+        </div>
+      </div>
+      
+      <div class="settings-grid media-settings" style="margin-top: 32px;">
         <label class="panel">Livre PDF français
           <input name="pdfFr" type="file" accept="application/pdf" />
           <span class="muted">${s.fileNames.pdfFr || "Aucun PDF chargé"}</span>
@@ -115,10 +143,6 @@ function renderSettings() {
         <label class="panel">Livre PDF arabe
           <input name="pdfAr" type="file" accept="application/pdf" />
           <span class="muted">${s.fileNames.pdfAr || "Aucun PDF chargé"}</span>
-        </label>
-        <label class="panel">Couverture du livre
-          <input name="cover" type="file" accept="image/*" />
-          <span class="muted">${s.fileNames.cover || "Couverture par défaut"}</span>
         </label>
       </div>
       <div class="settings-grid">
@@ -133,12 +157,39 @@ function renderSettings() {
       </div>
       <div class="settings-actions">
         <button class="primary" type="submit">Enregistrer les paramètres</button>
-        <button class="primary muted-btn" type="button" data-download-admin-file="pdfFr">Télécharger PDF FR</button>
-        <button class="primary muted-btn" type="button" data-download-admin-file="pdfAr">Télécharger PDF AR</button>
-        <button class="primary muted-btn" type="button" data-download-admin-file="cover">Télécharger couverture</button>
+        <button class="primary muted-btn" type="button" data-download-admin-file="pdfFr">⇩ PDF Français</button>
+        <button class="primary muted-btn" type="button" data-download-admin-file="pdfAr">⇩ PDF Arabe</button>
       </div>
     </form>
   `;
+  
+  // Bind cover preview on file select
+  const coverInput = document.getElementById("coverInput");
+  if (coverInput) {
+    coverInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const preview = document.getElementById("coverPreview");
+        if (preview) {
+          preview.src = URL.createObjectURL(file);
+        }
+      }
+    });
+  }
+  
+  // Bind remove cover button
+  const removeCoverBtn = document.getElementById("removeCover");
+  if (removeCoverBtn) {
+    removeCoverBtn.addEventListener("click", async () => {
+      if (confirm("Supprimer la couverture personnalisée et revenir à la couverture par défaut ?")) {
+        await Hikma.deleteFile("cover");
+        const current = Hikma.settings();
+        current.fileNames.cover = "";
+        Hikma.saveSettings(current);
+        renderSettings();
+      }
+    });
+  }
 }
 
 function renderArchives() {
@@ -305,9 +356,10 @@ function bindAdmin() {
       await Hikma.putFile("pdfAr", form.pdfAr.files[0]);
       next.fileNames.pdfAr = form.pdfAr.files[0].name;
     }
-    if (form.cover.files[0]) {
-      await Hikma.putFile("cover", form.cover.files[0]);
-      next.fileNames.cover = form.cover.files[0].name;
+    const coverInput = document.getElementById("coverInput");
+    if (coverInput && coverInput.files[0]) {
+      await Hikma.putFile("cover", coverInput.files[0]);
+      next.fileNames.cover = coverInput.files[0].name;
     }
     Hikma.saveSettings(next);
     renderAdmin();

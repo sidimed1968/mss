@@ -182,6 +182,17 @@ const Hikma = (() => {
     return file;
   }
 
+  async function deleteFile(key) {
+    const db = await openDb();
+    await new Promise((resolve, reject) => {
+      const tx = db.transaction(DB_STORE, "readwrite");
+      tx.objectStore(DB_STORE).delete(key);
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+    db.close();
+  }
+
   async function fileToDataUrl(file) {
     return new Promise(resolve => {
       if (!file) {
@@ -329,6 +340,7 @@ ${xref}
 
   return {
     applyLanguage,
+    deleteFile,
     downloadBlob,
     downloadBook,
     escapeAttr,
